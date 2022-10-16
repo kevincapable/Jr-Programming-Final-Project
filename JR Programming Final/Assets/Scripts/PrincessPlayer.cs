@@ -7,6 +7,7 @@ public class PrincessPlayer : Player //INHERITANCE
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
         playerPosition = transform.position;
     }

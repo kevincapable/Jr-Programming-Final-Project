@@ -6,13 +6,16 @@ public class Ammo : MonoBehaviour
 {
     public Rigidbody ammoBody;
     public float speed;
+    public GameManager gameManager;
 
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         speed = 25;
         ammoBody = GetComponent<Rigidbody>();
-        ammoBody.velocity = Vector3.forward*speed;
+        ammoBody.velocity = gameManager.ammoDirection*speed;
     }
+
 
     private void Update()
     {
@@ -20,5 +23,15 @@ public class Ammo : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+        
+        
     }
 }

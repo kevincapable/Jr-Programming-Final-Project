@@ -9,13 +9,12 @@ public class Player : MonoBehaviour
     protected Vector3 moveInput;
     public float speed;
     public Vector3 playerPosition;
-   
     protected Animator animator;
-    
-    public GameObject[] ammoArray;
+    public GameManager gameManager;
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
         playerPosition = transform.position;
     }
@@ -47,9 +46,9 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Sign(transform.position.z) * 50);
         }
 
-        if (transform.position.y < -.5f)
+        if (transform.position.y < 0)
         {
-            transform.position = new Vector3(transform.position.x, -.5f, transform.position.z);
+            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         }
     }
     public virtual void Move()
@@ -74,7 +73,16 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Instantiate(ammoArray[0], transform.position + new Vector3(0, 1, 1), transform.rotation);
+            gameManager.ammoDirection = new Vector3
+                                                (
+                                                    Camera.main.ScreenPointToRay(Input.mousePosition).direction.x,
+                                                    0,
+                                                    Camera.main.ScreenPointToRay(Input.mousePosition).direction.z
+                                                ).normalized;
+
+            Instantiate(gameManager.ammoArray[gameManager.ammoIndex], transform.position + new Vector3(0, 2, 1), transform.rotation);
+            
+
         }
             
     }

@@ -7,6 +7,7 @@ public class PrincePlayer : Player //INHERITANCE
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
         playerPosition = transform.position;
     }
@@ -24,10 +25,5 @@ public class PrincePlayer : Player //INHERITANCE
         CheckBound();
 
         animator.SetFloat("Speed", Vector3.Magnitude(moveInput));
-    }
-
-    public override void Shoot()
-    {
-        base.Shoot();
     }
 }

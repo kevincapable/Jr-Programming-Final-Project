@@ -7,6 +7,7 @@ public class BigRobotPlayer : Player //INHERITANCE
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
         playerPosition = transform.position;
     }
@@ -25,4 +26,6 @@ public class BigRobotPlayer : Player //INHERITANCE
 
         animator.SetFloat("Speed", Vector3.Magnitude(moveInput));
     }
+
+
 }
