@@ -51,7 +51,16 @@ public class Player : MonoBehaviour
 
     public virtual void Move()
     {
-        
+        if (Mathf.Abs(transform.position.x) > 50)
+        {
+            transform.position = new Vector3(Mathf.Sign(transform.position.x)*50, transform.position.y, transform.position.z);
+        }
+
+        if (Mathf.Abs(transform.position.z) > 50)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Sign(transform.position.z) * 50);
+        }
+
         transform.Translate(moveInput*speed);
         Debug.Log(moveInput.ToString());
     }
