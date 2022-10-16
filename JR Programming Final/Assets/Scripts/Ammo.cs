@@ -14,5 +14,11 @@ public class Ammo : MonoBehaviour
         ammoBody.velocity = Vector3.forward*speed;
     }
 
-
+    private void Update()
+    {
+        if ((ammoBody.velocity.sqrMagnitude < 1) || (Mathf.Abs(transform.position.x) > 50) || (Mathf.Abs(transform.position.z) > 50))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

@@ -8,7 +8,7 @@ using TMPro;
 
 public class MainManager : MonoBehaviour
 {
-    public static MainManager instance { get; private set; }
+    public static MainManager instance { get; private set; } //Encapsulation
     public GameObject dropDown;
     public static int characterSelec;
     private void Awake()
