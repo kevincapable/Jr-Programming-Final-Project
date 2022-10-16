@@ -2059,7 +2059,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   playerPosition: {x: 0, y: 0, z: 0}
-  ammoArray: []
+  ammoArray:
+  - {fileID: 3158208427010130255, guid: 7adf3da913837a84a8b97535d5e62226, type: 3}
 --- !u!1 &7050810600574524132
 GameObject:
   m_ObjectHideFlags: 0

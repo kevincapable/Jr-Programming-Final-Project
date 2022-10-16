@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float horInput;
-    private float verInput;
-    private bool jumpInput;
-    private Vector3 moveInput;
+    protected float horInput;
+    protected float verInput;
+    protected bool jumpInput;
+    protected Vector3 moveInput;
     public float speed;
     public Vector3 playerPosition;
    
-    Animator animator;
+    protected Animator animator;
     
     public GameObject[] ammoArray;
 
@@ -49,18 +49,19 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Move()
+    public virtual void Move()
     {
         
         transform.Translate(moveInput*speed);
+        Debug.Log(moveInput.ToString());
     }
 
-    public void Jump()
+    public virtual void Jump()
     {
         animator.SetTrigger("Jump");
     }
 
-    public void Shoot()
+    public virtual void Shoot()
     {
         
         Instantiate(ammoArray[0], transform.position + new Vector3(0,1,1) ,transform.rotation);
