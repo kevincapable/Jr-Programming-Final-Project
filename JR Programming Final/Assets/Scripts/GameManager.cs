@@ -5,20 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] charArray;
     public Vector3 startPosition;
+    public Vector3 ammoDirection;
+
+    public GameObject[] charArray;
     public GameObject player;
     public GameObject[] ammoArray;
     public GameObject[] enemyArray;
-    public int ammoIndex = 0;
-    public Vector3 ammoDirection;
     public GameObject gameOverCanvas;
+
+    public int ammoIndex = 0;
     public int waveNumber;
     public int enemyHP;
     public int enemiesLeft;
-    public int enemySpeed;
+    
     public bool gameOver;
+
+    public float enemySpeed;
     public float gameTime;
+
 
 
     private void Awake()
@@ -29,10 +34,12 @@ public class GameManager : MonoBehaviour
 
         gameTime = 0;
         gameOver = false;
+        
         enemySpeed = 1;
-        waveNumber = 0;
         enemyHP = 0;
-        enemiesLeft = waveNumber;
+
+        waveNumber = 0;
+        enemiesLeft = 0;
     }
 
     private void Update()
@@ -49,16 +56,20 @@ public class GameManager : MonoBehaviour
     {
         waveNumber++;
         enemyHP++;
-        enemySpeed *= 2;
-        enemiesLeft = 0;
+        enemySpeed *= 1.1f;
 
         for (int i = 0; i < waveNumber; i++)
         {
-            Instantiate(enemyArray[1], new Vector3(Random.Range(-50, 50), 2.0f, 50), Quaternion.Euler(Vector3.back));
-            Instantiate(enemyArray[0], new Vector3(Random.Range(-50, 50), 5, 50), Quaternion.Euler(Vector3.back));
+            Instantiate(enemyArray[1], //Spawn French Fries
+                        new Vector3(Random.Range(-50, 50), 2.0f, 50), 
+                        Quaternion.Euler(Vector3.back));
+            Instantiate(enemyArray[0], //Spawn burgers
+                        new Vector3(Random.Range(-50, 50), 5, 50), 
+                        Quaternion.Euler(Vector3.back));
             enemiesLeft += 2;
         }
     }    
+
     public void AmmoSwap()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -79,7 +90,6 @@ public class GameManager : MonoBehaviour
             ammoIndex = 3;
         }
     }
-
 
     public void GameOver()
     {

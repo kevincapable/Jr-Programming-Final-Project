@@ -11,7 +11,7 @@ public class Ammo : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        speed = 25;
+        speed = 50;
         ammoBody = GetComponent<Rigidbody>();
         ammoBody.velocity = gameManager.ammoDirection*speed;
     }

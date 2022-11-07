@@ -11,7 +11,7 @@ public class EnemyFrenchFry : Enemy
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        speed = gameManager.enemySpeed;
+        speed = gameManager.enemySpeed*2;
         maxHealthPoints = gameManager.enemyHP;
         healthPoints = gameManager.enemyHP;
         targetPlayer = gameManager.player;
@@ -36,7 +36,7 @@ public class EnemyFrenchFry : Enemy
     }
 
 
-    public override void MoveToPlayer()
+    public override void MoveToPlayer() //POLYMORPHISM
     {
         base.MoveToPlayer();
         transform.Translate(strafeSpeed*strafeIndex*Time.deltaTime, 0, 0);

@@ -6,18 +6,21 @@ public class Player : MonoBehaviour
 {
     protected float horInput;
     protected float verInput;
-    protected Vector3 moveInput;
     public float speed;
+    public float shootTime;
+
+    protected Vector3 moveInput;
     public Vector3 playerPosition;
+
     protected Animator animator;
+
     public GameManager gameManager;
-    public Camera subCamera;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
         playerPosition = transform.position;
-        subCamera = GameObject.Find("SubCamera").GetComponent<Camera>();
+        shootTime = 0.0f;
     }
 
     // Update is called once per frame
@@ -81,10 +84,13 @@ public class Player : MonoBehaviour
 
     public virtual void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        shootTime += Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.Mouse0) && (shootTime >= 0.1f))
         {
             Vector3 mousePoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 25));
-            float meshX = Camera.main.transform.position.x
+            
+            float meshX = Camera.main.transform.position.x //World space position of mouse clicked on the xz plane at y=0
                 + (mousePoint.x - Camera.main.transform.position.x)
                 * (Camera.main.transform.position.y-2)
                 / (Camera.main.transform.position.y - mousePoint.y);
@@ -95,7 +101,7 @@ public class Player : MonoBehaviour
            
             gameManager.ammoDirection = (new Vector3(meshX,0,meshZ) -  transform.position - new Vector3(0, 2, 1)).normalized;
             Instantiate(gameManager.ammoArray[gameManager.ammoIndex], transform.position + new Vector3(0, 2, 1), transform.rotation);
-            
+            shootTime = 0;
 
         }
             

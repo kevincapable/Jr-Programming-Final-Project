@@ -7,22 +7,24 @@ using TMPro;
 public class Enemy : MonoBehaviour
 {
     public GameManager gameManager;
-    public Slider hpSlider;
-    public TMP_Text hpText;
-
     public GameObject targetPlayer;
+    
+    public Slider hpSlider;
+    
+    public TMP_Text hpText;
     
     public float speed;
 
     public int healthPoints;
     public int maxHealthPoints;
-    // Start is called before the first frame update
+    
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
         speed = gameManager.enemySpeed;
-        maxHealthPoints = gameManager.enemyHP;
-        healthPoints = gameManager.enemyHP;
+        maxHealthPoints = gameManager.enemyHP*2;
+        healthPoints = maxHealthPoints;
         targetPlayer = gameManager.player;
         hpText.text = "HP: " + healthPoints;
     }
