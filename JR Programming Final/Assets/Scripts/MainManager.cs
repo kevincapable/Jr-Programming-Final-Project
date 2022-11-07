@@ -13,6 +13,7 @@ public class MainManager : MonoBehaviour
     public static int characterSelec;
     private void Awake()
     {
+        
         if (instance != null)
         {
             Destroy(gameObject);

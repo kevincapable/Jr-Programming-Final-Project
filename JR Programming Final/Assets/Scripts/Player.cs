@@ -11,12 +11,13 @@ public class Player : MonoBehaviour
     public Vector3 playerPosition;
     protected Animator animator;
     public GameManager gameManager;
-
+    public Camera subCamera;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         animator = GetComponent<Animator>();
         playerPosition = transform.position;
+        subCamera = GameObject.Find("SubCamera").GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -32,6 +33,15 @@ public class Player : MonoBehaviour
         CheckBound();
 
         animator.SetFloat("Speed",Vector3.Magnitude(moveInput));
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            gameManager.GameOver();
+
+        }
     }
 
     public virtual void CheckBound()
@@ -73,13 +83,17 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            gameManager.ammoDirection = new Vector3
-                                                (
-                                                    Camera.main.ScreenPointToRay(Input.mousePosition).direction.x,
-                                                    0,
-                                                    Camera.main.ScreenPointToRay(Input.mousePosition).direction.z
-                                                ).normalized;
-
+            Vector3 mousePoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 25));
+            float meshX = Camera.main.transform.position.x
+                + (mousePoint.x - Camera.main.transform.position.x)
+                * (Camera.main.transform.position.y-2)
+                / (Camera.main.transform.position.y - mousePoint.y);
+            float meshZ = Camera.main.transform.position.z
+                + (mousePoint.z - Camera.main.transform.position.z)
+                * (Camera.main.transform.position.y-2)
+                / (Camera.main.transform.position.y - mousePoint.y);
+           
+            gameManager.ammoDirection = (new Vector3(meshX,0,meshZ) -  transform.position - new Vector3(0, 2, 1)).normalized;
             Instantiate(gameManager.ammoArray[gameManager.ammoIndex], transform.position + new Vector3(0, 2, 1), transform.rotation);
             
 

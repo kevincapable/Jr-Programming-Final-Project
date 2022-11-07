@@ -717,6 +717,8 @@ GameObject:
   - component: {fileID: 3131471158681180425}
   - component: {fileID: 3242452163429341746}
   - component: {fileID: 999465731}
+  - component: {fileID: 7262458607286674687}
+  - component: {fileID: -7165114995178463834}
   m_Layer: 0
   m_Name: Player Princess
   m_TagString: Player
@@ -778,8 +780,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   playerPosition: {x: 0, y: 0, z: 0}
-  ammoArray:
-  - {fileID: 3158208427010130255, guid: 7adf3da913837a84a8b97535d5e62226, type: 3}
+  gameManager: {fileID: 0}
+--- !u!65 &7262458607286674687
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323550377408119731}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.6828824, z: 1}
+  m_Center: {x: 0, y: 0.8508083, z: 0}
+--- !u!54 &-7165114995178463834
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323550377408119731}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &2339513157318310778
 GameObject:
   m_ObjectHideFlags: 0
